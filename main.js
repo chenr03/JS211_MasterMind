@@ -15,7 +15,7 @@ let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 console.log(`Hey user! These are your possible inputs: `, `${letters.join(', ')}`.rainbow);
 
 const printBoard = () => {
-   /** everytime after user's input, the board will print hints (guess, correctLettersAndLocations and correctLettersButNotLocation)  */
+   /** with every user's input, the board will print hints (guess, correctLettersAndLocations and correctLettersButNotLocation)  */
    for (let i = 0; i < board.length; i++) {
       console.log(`Attempt #${i + 1}:`.underline, board[i].cyan);
    }
@@ -40,9 +40,10 @@ const generateSolution = () => {
    solution = solution.join('');
 };
 
+// this function executes THIRD
 const generateHint = guess => {
    // console.log('=====guess:', guess);
-   // console.log('=====solution:', solution);
+   console.log('=====solution:', solution);
    let correctLettersAndLocations = 0;
    let correctLettersButNotLocation = 0;
    let indexOfCorrectLetterAndLocations;
@@ -61,7 +62,7 @@ const generateHint = guess => {
          // console.log(`Correct letter and its location: ${letter}`.red);
          indexOfCorrectLetterAndLocations = index;
          correctLettersAndLocations++;
-         solutionArray[index] = null;
+      //   solutionArray[index] = null;
       }
 
       if (guessArray.includes(letter) && index !== guessArray.indexOf(letter)) {
@@ -69,9 +70,11 @@ const generateHint = guess => {
          // console.log(`Correct letter but not its location: ${letter}`.yellow);
          indexOfCorrectLetterAndWrongLocation = index;
          correctLettersButNotLocation++;
-         solutionArray[index] = null;
+      //   solutionArray[index] = null;
       }
    });
+
+   // console.log(solutionArray)
 
    // console.log(`solutionArray: ${solutionArray}`);
    // console.log(`correctLettersAndLocations: ${correctLettersAndLocations}`.red);
@@ -81,6 +84,7 @@ const generateHint = guess => {
    board.push(`Your guess is: ${guess}. Correct Letters and Locations: ${correctLettersAndLocations}. Correct Letters but not Locations: ${correctLettersButNotLocation}.`);
    return `${correctLettersAndLocations}-${correctLettersButNotLocation}`;
 };
+
 
 const mastermind = guess => {
    // console.log('=====guess:', guess);
@@ -102,6 +106,7 @@ const mastermind = guess => {
    }
 };
 
+// getPrompt() function executes FIRST then all 3 function inside
 const getPrompt = () => {
    rl.question('Enter your guess (4 non-duplicate letters): '.underline, guess => {
       mastermind(guess);
